@@ -69,6 +69,9 @@ class QuizApp {
         this.users = [];
         this.leaderboard = [];
         this.init();
+        this.initImageUpload();
+        this.initThemeToggle();
+        
     }
 
     init() {
