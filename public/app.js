@@ -229,34 +229,38 @@ async authenticateUser(email, password, isSignup = false) {
     }
 
     async handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
 
-        if (this.validateCredentials(email, password)) {
-            this.currentUser = this.users.find(user => user.email === email);
-            if (!this.currentUser) {
-                this.currentUser = {
-                    id: Date.now(),
-                    name: email.split('@')[0],
-                    email: email,
-                    password: password,
-                    stats: {
-                        totalQuizzes: 0,
-                        avgScore: 0,
-                        bestScore: 0,
-                        rank: 0
-                    },
-                    history: []
-                };
-                this.users.push(this.currentUser);
-            }
+    if (!this.validateCredentials(email, password)) {
+        this.showToast('Invalid email or password format!', 'error');
+        return;
+    }
+
+    try {
+        this.showToast('Authenticating...', 'info');
+        const userData = await this.authenticateUser(email, password, false);
+        
+        this.currentUser = userData;
+        if (userData.profileImage) {
+            document.getElementById('profile-img').src = userData.profileImage;
+            document.querySelector('.user-avatar').src = userData.profileImage;
+        }
+        
+        this.showAuthenticatedState();
+        this.showToast('Login successful!', 'success');
+    } catch (error) {
+        const existingUser = this.users.find(user => user.email === email && user.password === password);
+        if (existingUser) {
+            this.currentUser = existingUser;
             this.showAuthenticatedState();
-            this.showToast('Login successful!', 'success');
+            this.showToast('Login successful (offline mode)!', 'success');
         } else {
-            this.showToast('Invalid credentials!', 'error');
+            this.showToast(error.message || 'Invalid credentials!', 'error');
         }
     }
+}
 
     async handleSignup(e) {
         e.preventDefault();
