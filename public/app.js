@@ -841,4 +841,176 @@ class QuizApp {
         this.loadAchievements();
     }
 
-    loadRecentActivity()
+    loadRecentActivity() {
+        const activityList = document.getElementById('activity-list');
+        activityList.innerHTML = '';
+        
+        if (this.currentUser.history.length === 0) {
+            activityList.innerHTML = '<div class="no-activity">No recent activity</div>';
+            return;
+        }
+        
+        const recentQuizzes = this.currentUser.history.slice(-5).reverse();
+        
+        recentQuizzes.forEach(quiz => {
+            const percentage = (quiz.score / quiz.totalQuestions) * 100;
+            const timeAgo = this.getTimeAgo(quiz.endTime);
+            
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item';
+            activityItem.innerHTML = `
+                <div class="activity-icon">
+                    <i class="fas fa-quiz"></i>
+                </div>
+                <div class="activity-info">
+                    <h4>Completed Roman Numerals Quiz</h4>
+                    <p>Score: ${quiz.score}/${quiz.totalQuestions} (${percentage.toFixed(1)}%)</p>
+                    <span class="activity-time">${timeAgo}</span>
+                </div>
+            `;
+            activityList.appendChild(activityItem);
+        });
+    }
+
+    loadAchievements() {
+        const achievementsGrid = document.getElementById('achievements-grid');
+        const achievements = [
+            {
+                title: 'First Quiz',
+                description: 'Complete your first quiz',
+                icon: 'trophy',
+                unlocked: this.currentUser.stats.totalQuizzes >= 1
+            },
+            {
+                title: 'Perfect Score',
+                description: 'Score 100% on a quiz',
+                icon: 'star',
+                unlocked: this.currentUser.stats.bestScore === 100
+            },
+            {
+                title: 'Quiz Master',
+                description: 'Complete 10 quizzes',
+                icon: 'medal',
+                unlocked: this.currentUser.stats.totalQuizzes >= 10
+            }
+        ];
+        
+        achievementsGrid.innerHTML = '';
+        achievements.forEach(achievement => {
+            const achievementItem = document.createElement('div');
+            achievementItem.className = `achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}`;
+            achievementItem.innerHTML = `
+                <div class="achievement-icon">
+                    <i class="fas fa-${achievement.icon}"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>${achievement.title}</h4>
+                    <p>${achievement.description}</p>
+                </div>
+            `;
+            achievementsGrid.appendChild(achievementItem);
+        });
+    }
+
+    showReviewModal() {
+        const modal = document.getElementById('review-modal');
+        const reviewGrid = document.getElementById('review-grid');
+        
+        reviewGrid.innerHTML = '';
+        this.questions.forEach((question, index) => {
+            const reviewItem = document.createElement('div');
+            reviewItem.className = `review-item ${this.userAnswers[index] ? 'answered' : 'unanswered'}`;
+            reviewItem.innerHTML = `
+                <div class="review-number">Q${index + 1}</div>
+                <div class="review-subject">${question.subject}</div>
+                <div class="review-status">
+                    ${this.userAnswers[index] ? 
+                        `<i class="fas fa-check"></i> ${this.userAnswers[index]}` : 
+                        '<i class="fas fa-minus"></i> Unanswered'
+                    }
+                </div>
+            `;
+            reviewItem.addEventListener('click', () => {
+                this.currentQuestionIndex = index;
+                this.loadQuestion();
+                this.closeModal('review-modal');
+            });
+            reviewGrid.appendChild(reviewItem);
+        });
+        
+        modal.style.display = 'flex';
+    }
+
+    showSettingsModal() {
+        const modal = document.getElementById('settings-modal');
+        document.getElementById('mongodb-url').value = this.mongoUrl;
+        modal.style.display = 'flex';
+    }
+
+    closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    toggleMobileMenu() {
+        const navMenu = document.getElementById('nav-menu');
+        navMenu.classList.toggle('active');
+    }
+
+    showToast(message, type = 'info') {
+        const toast = document.getElementById('toast');
+        const toastMessage = toast.querySelector('.toast-message');
+        const toastIcon = toast.querySelector('.toast-icon i');
+        
+        toastMessage.textContent = message;
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+            success: 'check-circle',
+            error: 'exclamation-circle',
+            warning: 'exclamation-triangle',
+            info: 'info-circle'
+        };
+        
+        toastIcon.className = `fas fa-${icons[type] || icons.info}`;
+        
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    getTimeAgo(date) {
+        const now = new Date();
+        const diff = now - new Date(date);
+        const minutes = Math.floor(diff / 60000);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        
+        if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+        if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        return 'Just now';
+    }
+
+    loadUserData() {
+    const savedUsers = JSON.parse(localStorage.getItem('quiz-users') || '[]');
+    const savedUrl = localStorage.getItem('quiz-mongo-url');
+    if (savedUrl) {
+        this.mongoUrl = savedUrl;
+    }
+    this.users = savedUsers;
+}
+
+    saveUserData() {
+        localStorage.setItem('quiz-users', JSON.stringify(this.users));
+    }
+
+    viewHistory() {
+        this.switchPage('profile');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.quizApp = new QuizApp();
+});
