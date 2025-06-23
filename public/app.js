@@ -263,27 +263,44 @@ async authenticateUser(email, password, isSignup = false) {
 }
 
     async handleSignup(e) {
-        e.preventDefault();
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        const confirmPassword = document.getElementById('signup-confirm').value;
+    e.preventDefault();
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('signup-confirm').value;
 
-        if (password !== confirmPassword) {
-            this.showToast('Passwords do not match!', 'error');
-            return;
-        }
+    if (password !== confirmPassword) {
+        this.showToast('Passwords do not match!', 'error');
+        return;
+    }
 
-        if (this.users.find(user => user.email === email)) {
-            this.showToast('Email already exists!', 'error');
-            return;
-        }
+    if (!this.validateCredentials(email, password)) {
+        this.showToast('Invalid email or password format!', 'error');
+        return;
+    }
 
+    if (this.users.find(user => user.email === email)) {
+        this.showToast('Email already exists!', 'error');
+        return;
+    }
+
+    try {
+        this.showToast('Creating account...', 'info');
+        const userData = await this.authenticateUser(email, password, true);
+        
+        this.currentUser = userData;
+        this.users.push(userData);
+        this.saveUserData();
+        
+        this.showAuthenticatedState();
+        this.showToast('Account created successfully!', 'success');
+    } catch (error) {
         this.currentUser = {
             id: Date.now(),
             name: name,
             email: email,
             password: password,
+            profileImage: 'https://via.placeholder.com/120',
             stats: {
                 totalQuizzes: 0,
                 avgScore: 0,
@@ -294,9 +311,11 @@ async authenticateUser(email, password, isSignup = false) {
         };
 
         this.users.push(this.currentUser);
+        this.saveUserData();
         this.showAuthenticatedState();
-        this.showToast('Account created successfully!', 'success');
+        this.showToast('Account created (offline mode)!', 'success');
     }
+}
 
     handleLogout() {
         this.currentUser = null;
