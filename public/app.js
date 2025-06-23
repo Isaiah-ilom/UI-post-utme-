@@ -824,9 +824,13 @@ async authenticateUser(email, password, isSignup = false) {
     }
 
     loadUserData() {
-        const savedUsers = JSON.parse(localStorage.getItem('quiz-users') || '[]');
-        this.users = savedUsers;
+    const savedUsers = JSON.parse(localStorage.getItem('quiz-users') || '[]');
+    const savedUrl = localStorage.getItem('quiz-mongo-url');
+    if (savedUrl) {
+        this.mongoUrl = savedUrl;
     }
+    this.users = savedUsers;
+}
 
     saveUserData() {
         localStorage.setItem('quiz-users', JSON.stringify(this.users));
