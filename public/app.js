@@ -218,6 +218,15 @@ async authenticateUser(email, password, isSignup = false) {
                 this.closeModal(e.target.id);
             }
         });
+        document.getElementById('db-settings-form').addEventListener('submit', (e) => this.handleDbSettings(e));
+    handleDbSettings(e) {
+    e.preventDefault();
+    const newUrl = document.getElementById('mongodb-url').value;
+    this.mongoUrl = newUrl;
+    localStorage.setItem('quiz-mongo-url', newUrl);
+    this.closeModal('settings-modal');
+    this.showToast('Database settings saved!', 'success');
+    }
     }
 
     switchAuthTab(tab) {
