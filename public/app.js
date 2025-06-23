@@ -82,7 +82,97 @@ class QuizApp {
             this.loadUserData();
         }, 2000);
     }
+    initImageUpload() {
+    const avatarEdit = document.querySelector('.avatar-edit');
+    const profileImg = document.getElementById('profile-img');
+    const navUserAvatar = document.querySelector('.user-avatar');
+    
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+    
+    avatarEdit.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imageUrl = e.target.result;
+                profileImg.src = imageUrl;
+                navUserAvatar.src = imageUrl;
+                if (this.currentUser) {
+                    this.currentUser.profileImage = imageUrl;
+                    this.saveUserData();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
 
+initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('quiz-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    if (savedTheme === 'dark') {
+        themeToggle.checked = true;
+    }
+    
+    themeToggle.addEventListener('change', () => {
+        const theme = themeToggle.checked ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('quiz-theme', theme);
+    });
+}
+
+async connectToMongoDB() {
+    try {
+        const response = await fetch('/api/connect-db', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                mongoUrl: this.mongoUrl
+            })
+        });
+        return response.ok;
+    } catch (error) {
+        console.error('MongoDB connection failed:', error);
+        return false;
+    }
+}
+
+async authenticateUser(email, password, isSignup = false) {
+    try {
+        const endpoint = isSignup ? '/api/signup' : '/api/login';
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+        
+        if (response.ok) {
+            const userData = await response.json();
+            return userData;
+        } else {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+    } catch (error) {
+        console.error('Authentication failed:', error);
+        throw error;
+    }
+  }
+                
     showLoadingScreen() {
         document.getElementById('loading-screen').style.display = 'flex';
     }
