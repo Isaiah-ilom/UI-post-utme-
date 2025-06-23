@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post UTME 2025 - Advanced Roman Numerals Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading Quiz...</p>
+        </div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Post UTME 2025</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
+                <a href="#" class="nav-link" data-page="quiz">Quiz</a>
+                <a href="#" class="nav-link" data-page="leaderboard">Leaderboard</a>
+                <a href="#" class="nav-link" data-page="profile">Profile</a>
+                <div class="nav-user" id="nav-user">
+                    <img src="https://via.placeholder.com/40" alt="User" class="user-avatar">
+                    <span class="user-name" id="user-name">User</span>
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-container" id="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome to Post UTME 2025</h1>
+                <p>Master Roman Numerals Quiz</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+
+            <form class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button type="submit" class="auth-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+            </form>
+
+            <form class="auth-form" id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button type="submit" class="auth-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <main class="main-content" id="main-content">
+        <div class="page active" id="dashboard-page">
+            <div class="dashboard-header">
+                <h1>Welcome Back, <span id="dashboard-name">Student</span>!</h1>
+                <p>Ready to master Roman Numerals?</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-quizzes">0</h3>
+                        <p>Quizzes Taken</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="avg-score">0%</h3>
+                        <p>Average Score</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="best-score">0%</h3>
+                        <p>Best Score</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-ranking-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="user-rank">#0</h3>
+                        <p>Global Rank</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-cards">
+                <div class="action-card" data-action="start-quiz">
+                    <div class="action-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <h3>Start New Quiz</h3>
+                    <p>Test your Roman Numerals knowledge</p>
+                </div>
+                <div class="action-card" data-action="view-history">
+                    <div class="action-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Quiz History</h3>
+                    <p>Review your past attempts</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="quiz-page">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h1>Roman Numerals Quiz</h1>
+                    <div class="quiz-meta">
+                        <span class="quiz-subject" id="quiz-subject">Science</span>
+                        <span class="quiz-timer" id="quiz-timer">15:00</span>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="current-q">1</span> of <span id="total-q">10</span>
+                    </div>
+                </div>
+
+                <div class="question-container" id="question-container">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-number">Question <span id="q-number">1</span></div>
+                            <div class="question-subject" id="q-subject">Physics</div>
+                        </div>
+                        <div class="question-text" id="question-text">
+                            Loading question...
+                        </div>
+                        <div class="roman-options" id="roman-options">
+                            <div class="roman-item">I. Loading...</div>
+                            <div class="roman-item">II. Loading...</div>
+                            <div class="roman-item">III. Loading...</div>
+                            <div class="roman-item">IV. Loading...</div>
+                        </div>
+                        <div class="options-grid" id="options-grid">
+                            <div class="option" data-answer="A">A. Loading...</div>
+                            <div class="option" data-answer="B">B. Loading...</div>
+                            <div class="option" data-answer="C">C. Loading...</div>
+                            <div class="option" data-answer="D">D. Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="btn btn-secondary" id="prev-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <div class="control-center">
+                        <button class="btn btn-outline" id="review-btn">
+                            <i class="fas fa-eye"></i>
+                            Review
+                        </button>
+                        <button class="btn btn-warning" id="bookmark-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Bookmark
+                        </button>
+                    </div>
+                    <button class="btn btn-primary" id="next-btn" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-success" id="submit-quiz-btn" style="display: none;">
+                        <i class="fas fa-check"></i>
+                        Submit Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="results-page">
+            <div class="results-container">
+                <div class="results-header">
+                    <div class="results-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h1>Quiz Results</h1>
+                    <div class="results-score">
+                        <span class="score-number" id="final-score">0</span>
+                        <span class="score-total">/ 10</span>
+                    </div>
+                    <div class="results-percentage" id="score-percentage">0%</div>
+                    <div class="results-message" id="results-message">Great job!</div>
+                </div>
+
+                <div class="results-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon correct">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="breakdown-info">
+                            <h3 id="correct-count">0</h3>
+                            <p>Correct</p>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon incorrect">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="breakdown-info">
+                            <h3 id="incorrect-count">0</h3>
+                            <p>Incorrect</p>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon skipped">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                        <div class="breakdown-info">
+                            <h3 id="skipped-count">0</h3>
+                            <p>Skipped</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detailed-results" id="detailed-results">
+                    <h3>Detailed Analysis</h3>
+                    <div class="results-list" id="results-list"></div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary" id="retake-btn">
+                        <i class="fas fa-redo"></i>
+                        Retake Quiz
+                    </button>
+                    <button class="btn btn-outline" id="review-answers-btn">
+                        <i class="fas fa-eye"></i>
+                        Review Answers
+                    </button>
+                    <button class="btn btn-secondary" id="back-dashboard-btn">
+                        <i class="fas fa-home"></i>
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="leaderboard-page">
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <h1>Global Leaderboard</h1>
+                    <p>Top performers in Roman Numerals Quiz</p>
+                </div>
+                <div class="leaderboard-list" id="leaderboard-list">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Loading leaderboard...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="profile-page">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img src="https://via.placeholder.com/120" alt="Profile" id="profile-img">
+                        <button class="avatar-edit">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-info">
+                        <h1 id="profile-name">User Name</h1>
+                        <p id="profile-email">user@example.com</p>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <span class="stat-value" id="profile-quizzes">0</span>
+                                <span class="stat-label">Quizzes</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="stat-value" id="profile-avg">0%</span>
+                                <span class="stat-label">Average</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="stat-value" id="profile-best">0%</span>
+                                <span class="stat-label">Best Score</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-sections">
+                    <div class="profile-section">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list" id="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-quiz"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <h4>Completed Roman Numerals Quiz</h4>
+                                    <p>Score: 8/10 (80%)</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Achievements</h3>
+                        <div class="achievements-grid" id="achievements-grid">
+                            <div class="achievement-item locked">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4>First Quiz</h4>
+                                    <p>Complete your first quiz</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Review Questions</h2>
+                <button class="modal-close" id="close-review-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="review-grid" id="review-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Database Settings</h2>
+                <button class="modal-close" id="close-settings-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="db-settings-form">
+                    <div class="form-group">
+                        <label for="mongodb-url">MongoDB Connection URL</label>
+                        <input type="url" id="mongodb-url" placeholder="mongodb://localhost:27017/quiz-app" required>
+                        <small>Enter your MongoDB connection string</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save Settings
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <div class="toast-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="toast-message">Message</div>
+        </div>
+    </div>
+
+    <button class="settings-fab" id="settings-fab">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+          </html>
