@@ -581,7 +581,77 @@
             </div>
         </div>
     </div>
+   <!-- Add this modal for API key configuration -->
+<div class="modal" id="api-config-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>ALOCO API Configuration</h2>
+            <button class="modal-close" id="close-api-modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="api-config-form">
+                <div class="form-group">
+                    <label for="aloco-api-key">ALOCO API Key</label>
+                    <input type="password" id="aloco-api-key" placeholder="Enter your ALOCO API key" required>
+                    <small>Get your API key from ALOCO dashboard</small>
+                </div>
+                <div class="form-group">
+                    <label for="api-base-url">API Base URL</label>
+                    <input type="url" id="api-base-url" value="https://questions.aloc.com.ng/api/v2" readonly>
+                </div>
+                <div class="api-status" id="api-status">
+                    <i class="fas fa-wifi"></i>
+                    <span>Not Connected</span>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="test-connection">
+                        <i class="fas fa-plug"></i>
+                        Test Connection
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save Configuration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<!-- Add this progress modal for exam preparation -->
+<div class="modal" id="exam-prep-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Preparing Your Exam</h2>
+        </div>
+        <div class="modal-body">
+            <div class="prep-progress">
+                <div class="prep-step active">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Validating configuration</span>
+                </div>
+                <div class="prep-step">
+                    <i class="fas fa-download"></i>
+                    <span>Fetching questions</span>
+                </div>
+                <div class="prep-step">
+                    <i class="fas fa-shuffle"></i>
+                    <span>Randomizing questions</span>
+                </div>
+                <div class="prep-step">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Starting exam</span>
+                </div>
+            </div>
+            <div class="prep-progress-bar">
+                <div class="prep-progress-fill" id="prep-progress-fill"></div>
+            </div>
+            <div class="prep-status" id="prep-status">Initializing...</div>
+        </div>
+    </div>
+</div>
     <div class="toast" id="toast">
         <div class="toast-content">
             <div class="toast-icon">
