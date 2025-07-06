@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
         <div class="loading-spinner">
             <div class="spinner"></div>
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -24,20 +26,20 @@
             </div>
             <div class="nav-menu" id="nav-menu">
                 <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
-                <a href="#" class="nav-link" data-page="quiz" onclick="return false;">Quiz</a>
+                <a href="#" class="nav-link" data-page="quiz">Quiz</a>
                 <a href="#" class="nav-link" data-page="leaderboard">Leaderboard</a>
                 <a href="#" class="nav-link" data-page="profile">Profile</a>
                 <div class="nav-user" id="nav-user">
-                    <img src="https://via.placeholder.com/40" alt="User" class="user-avatar">
+                    <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
                     <span class="user-name" id="user-name">User</span>
                     <div class="theme-toggle-container">
-    <label class="theme-toggle">
-        <input type="checkbox" id="theme-toggle">
-        <span class="theme-slider">
-            <i class="fas fa-sun sun-icon"></i>
-            <i class="fas fa-moon moon-icon"></i>
-        </span>
-    </label>
+                        <label class="theme-toggle">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="theme-slider">
+                                <i class="fas fa-sun sun-icon"></i>
+                                <i class="fas fa-moon moon-icon"></i>
+                            </span>
+                        </label>
                     </div>
                     <button class="logout-btn" id="logout-btn">
                         <i class="fas fa-sign-out-alt"></i>
@@ -50,6 +52,7 @@
         </div>
     </nav>
 
+    <!-- Authentication Container -->
     <div class="auth-container" id="auth-container">
         <div class="auth-card">
             <div class="auth-header">
@@ -108,7 +111,9 @@
         </div>
     </div>
 
+    <!-- Main Content -->
     <main class="main-content" id="main-content">
+        <!-- Dashboard Page -->
         <div class="page active" id="dashboard-page">
             <div class="dashboard-header">
                 <h1>Welcome Back, <span id="dashboard-name">Student</span>!</h1>
@@ -172,6 +177,7 @@
             </div>
         </div>
 
+        <!-- Quiz Page -->
         <div class="page" id="quiz-page">
             <div class="quiz-container">
                 <div class="quiz-header">
@@ -242,6 +248,7 @@
             </div>
         </div>
 
+        <!-- Results Page -->
         <div class="page" id="results-page">
             <div class="results-container">
                 <div class="results-header">
@@ -309,6 +316,7 @@
             </div>
         </div>
 
+        <!-- Leaderboard Page -->
         <div class="page" id="leaderboard-page">
             <div class="leaderboard-container">
                 <div class="leaderboard-header">
@@ -324,11 +332,12 @@
             </div>
         </div>
 
+        <!-- Profile Page -->
         <div class="page" id="profile-page">
             <div class="profile-container">
                 <div class="profile-header">
                     <div class="profile-avatar">
-                        <img src="https://via.placeholder.com/120" alt="Profile" id="profile-img">
+                        <img src="https://via.placeholder.com/120" alt="Profile Avatar" id="profile-img">
                         <button class="avatar-edit">
                             <i class="fas fa-camera"></i>
                         </button>
@@ -387,163 +396,166 @@
                 </div>
             </div>
         </div>
+
+        <!-- Exam Mode Page -->
+        <div class="page" id="exam-mode-page">
+            <div class="exam-mode-container">
+                <div class="exam-mode-header">
+                    <h1>UTME Exam Mode</h1>
+                    <p>Customize your practice exam</p>
+                </div>
+                
+                <div class="exam-config-card">
+                    <form id="exam-config-form">
+                        <div class="config-section">
+                            <h3>Select Subjects</h3>
+                            <div class="subjects-grid">
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="mathematics" id="math-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-calculator"></i>
+                                        <span>Mathematics</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="english" id="english-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-book"></i>
+                                        <span>English</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="physics" id="physics-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-atom"></i>
+                                        <span>Physics</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="chemistry" id="chemistry-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-flask"></i>
+                                        <span>Chemistry</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="biology" id="biology-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-dna"></i>
+                                        <span>Biology</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="geography" id="geography-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-globe"></i>
+                                        <span>Geography</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="economics" id="economics-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Economics</span>
+                                    </div>
+                                </label>
+                                <label class="subject-option">
+                                    <input type="checkbox" name="subjects" value="government" id="government-subject">
+                                    <div class="subject-card">
+                                        <i class="fas fa-landmark"></i>
+                                        <span>Government</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <h3>Exam Settings</h3>
+                            <div class="settings-grid">
+                                <div class="setting-group">
+                                    <label for="questions-count">Number of Questions</label>
+                                    <select id="questions-count" name="questionsCount">
+                                        <option value="20">20 Questions</option>
+                                        <option value="40" selected>40 Questions</option>
+                                        <option value="60">60 Questions</option>
+                                        <option value="80">80 Questions</option>
+                                        <option value="100">100 Questions</option>
+                                        <option value="120">120 Questions</option>
+                                        <option value="160">160 Questions (Full UTME)</option>
+                                    </select>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="exam-duration">Exam Duration</label>
+                                    <select id="exam-duration" name="examDuration">
+                                        <option value="1800">30 Minutes</option>
+                                        <option value="3600">1 Hour</option>
+                                        <option value="5400">1.5 Hours</option>
+                                        <option value="7200" selected>2 Hours</option>
+                                        <option value="9000">2.5 Hours</option>
+                                        <option value="10800">3 Hours</option>
+                                    </select>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="difficulty-level">Difficulty Level</label>
+                                    <select id="difficulty-level" name="difficultyLevel">
+                                        <option value="easy">Easy</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="hard">Hard</option>
+                                        <option value="mixed">Mixed</option>
+                                    </select>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="exam-year">Exam Year</label>
+                                    <select id="exam-year" name="examYear">
+                                        <option value="2024" selected>2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="all">All Years</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <h3>Quick Presets</h3>
+                            <div class="presets-grid">
+                                <button type="button" class="preset-card" data-preset="utme-full">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <h4>Full UTME</h4>
+                                    <p>4 subjects, 160 questions, 3 hours</p>
+                                </button>
+                                <button type="button" class="preset-card" data-preset="utme-practice">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <h4>Practice Mode</h4>
+                                    <p>2 subjects, 40 questions, 1 hour</p>
+                                </button>
+                                <button type="button" class="preset-card" data-preset="speed-test">
+                                    <i class="fas fa-stopwatch"></i>
+                                    <h4>Speed Test</h4>
+                                    <p>1 subject, 20 questions, 30 minutes</p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="exam-actions">
+                            <button type="button" class="btn btn-secondary" id="back-to-dashboard">
+                                <i class="fas fa-arrow-left"></i>
+                                Back to Dashboard
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="start-exam-btn">
+                                <i class="fas fa-play"></i>
+                                Start Exam
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
-    <div class="page" id="exam-mode-page">
-    <div class="exam-mode-container">
-        <div class="exam-mode-header">
-            <h1>UTME Exam Mode</h1>
-            <p>Customize your practice exam</p>
-        </div>
-        
-        <div class="exam-config-card">
-            <form id="exam-config-form">
-                <div class="config-section">
-                    <h3>Select Subjects</h3>
-                    <div class="subjects-grid">
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="mathematics" id="math-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-calculator"></i>
-                                <span>Mathematics</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="english" id="english-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-book"></i>
-                                <span>English</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="physics" id="physics-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-atom"></i>
-                                <span>Physics</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="chemistry" id="chemistry-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-flask"></i>
-                                <span>Chemistry</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="biology" id="biology-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-dna"></i>
-                                <span>Biology</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="geography" id="geography-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-globe"></i>
-                                <span>Geography</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="economics" id="economics-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Economics</span>
-                            </div>
-                        </label>
-                        <label class="subject-option">
-                            <input type="checkbox" name="subjects" value="government" id="government-subject">
-                            <div class="subject-card">
-                                <i class="fas fa-landmark"></i>
-                                <span>Government</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
 
-                <div class="config-section">
-                    <h3>Exam Settings</h3>
-                    <div class="settings-grid">
-                        <div class="setting-group">
-                            <label for="questions-count">Number of Questions</label>
-                            <select id="questions-count" name="questionsCount">
-                                <option value="20">20 Questions</option>
-                                <option value="40" selected>40 Questions</option>
-                                <option value="60">60 Questions</option>
-                                <option value="80">80 Questions</option>
-                                <option value="100">100 Questions</option>
-                                <option value="120">120 Questions</option>
-                                <option value="160">160 Questions (Full UTME)</option>
-                            </select>
-                        </div>
-                        <div class="setting-group">
-                            <label for="exam-duration">Exam Duration</label>
-                            <select id="exam-duration" name="examDuration">
-                                <option value="1800">30 Minutes</option>
-                                <option value="3600">1 Hour</option>
-                                <option value="5400">1.5 Hours</option>
-                                <option value="7200" selected>2 Hours</option>
-                                <option value="9000">2.5 Hours</option>
-                                <option value="10800">3 Hours</option>
-                            </select>
-                        </div>
-                        <div class="setting-group">
-                            <label for="difficulty-level">Difficulty Level</label>
-                            <select id="difficulty-level" name="difficultyLevel">
-                                <option value="easy">Easy</option>
-                                <option value="medium" selected>Medium</option>
-                                <option value="hard">Hard</option>
-                                <option value="mixed">Mixed</option>
-                            </select>
-                        </div>
-                        <div class="setting-group">
-                            <label for="exam-year">Exam Year</label>
-                            <select id="exam-year" name="examYear">
-                                <option value="2024" selected>2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="all">All Years</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="config-section">
-                    <h3>Quick Presets</h3>
-                    <div class="presets-grid">
-                        <button type="button" class="preset-card" data-preset="utme-full">
-                            <i class="fas fa-graduation-cap"></i>
-                            <h4>Full UTME</h4>
-                            <p>4 subjects, 160 questions, 3 hours</p>
-                        </button>
-                        <button type="button" class="preset-card" data-preset="utme-practice">
-                            <i class="fas fa-dumbbell"></i>
-                            <h4>Practice Mode</h4>
-                            <p>2 subjects, 40 questions, 1 hour</p>
-                        </button>
-                        <button type="button" class="preset-card" data-preset="speed-test">
-                            <i class="fas fa-stopwatch"></i>
-                            <h4>Speed Test</h4>
-                            <p>1 subject, 20 questions, 30 minutes</p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="exam-actions">
-                    <button type="button" class="btn btn-secondary" id="back-to-dashboard">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Dashboard
-                    </button>
-                    <button type="submit" class="btn btn-primary" id="start-exam-btn">
-                        <i class="fas fa-play"></i>
-                        Start Exam
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+    <!-- Review Modal -->
     <div class="modal" id="review-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -558,6 +570,7 @@
         </div>
     </div>
 
+    <!-- Settings Modal -->
     <div class="modal" id="settings-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -581,77 +594,80 @@
             </div>
         </div>
     </div>
-   <!-- Add this modal for API key configuration -->
-<div class="modal" id="api-config-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>ALOCO API Configuration</h2>
-            <button class="modal-close" id="close-api-modal">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form id="api-config-form">
-                <div class="form-group">
-                    <label for="aloco-api-key">ALOCO API Key</label>
-                    <input type="password" id="aloco-api-key" placeholder="Enter your ALOCO API key" required>
-                    <small>Get your API key from ALOCO dashboard</small>
-                </div>
-                <div class="form-group">
-                    <label for="api-base-url">API Base URL</label>
-                    <input type="url" id="api-base-url" value="https://questions.aloc.com.ng/api/v2" readonly>
-                </div>
-                <div class="api-status" id="api-status">
-                    <i class="fas fa-wifi"></i>
-                    <span>Not Connected</span>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-outline" id="test-connection">
-                        <i class="fas fa-plug"></i>
-                        Test Connection
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i>
-                        Save Configuration
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
-<!-- Add this progress modal for exam preparation -->
-<div class="modal" id="exam-prep-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Preparing Your Exam</h2>
-        </div>
-        <div class="modal-body">
-            <div class="prep-progress">
-                <div class="prep-step active">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Validating configuration</span>
-                </div>
-                <div class="prep-step">
-                    <i class="fas fa-download"></i>
-                    <span>Fetching questions</span>
-                </div>
-                <div class="prep-step">
-                    <i class="fas fa-shuffle"></i>
-                    <span>Randomizing questions</span>
-                </div>
-                <div class="prep-step">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Starting exam</span>
-                </div>
+    <!-- API Configuration Modal -->
+    <div class="modal" id="api-config-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ALOCO API Configuration</h2>
+                <button class="modal-close" id="close-api-modal">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="prep-progress-bar">
-                <div class="prep-progress-fill" id="prep-progress-fill"></div>
+            <div class="modal-body">
+                <form id="api-config-form">
+                    <div class="form-group">
+                        <label for="aloco-api-key">ALOCO API Key</label>
+                        <input type="password" id="aloco-api-key" placeholder="Enter your ALOCO API key" required>
+                        <small>Get your API key from ALOCO dashboard</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="api-base-url">API Base URL</label>
+                        <input type="url" id="api-base-url" value="https://questions.aloc.com.ng/api/v2" readonly>
+                    </div>
+                    <div class="api-status" id="api-status">
+                        <i class="fas fa-wifi"></i>
+                        <span>Not Connected</span>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="test-connection">
+                            <i class="fas fa-plug"></i>
+                            Test Connection
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Save Configuration
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="prep-status" id="prep-status">Initializing...</div>
         </div>
     </div>
-</div>
+
+    <!-- Exam Preparation Modal -->
+    <div class="modal" id="exam-prep-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Preparing Your Exam</h2>
+            </div>
+            <div class="modal-body">
+                <div class="prep-progress">
+                    <div class="prep-step active">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Validating configuration</span>
+                    </div>
+                    <div class="prep-step">
+                        <i class="fas fa-download"></i>
+                        <span>Fetching questions</span>
+                    </div>
+                    <div class="prep-step">
+                        <i class="fas fa-shuffle"></i>
+                        <span>Randomizing questions</span>
+                    </div>
+                    <div class="prep-step">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Starting exam</span>
+                    </div>
+                </div>
+                <div class="prep-progress-bar">
+                    <div class="prep-progress-fill" id="prep-progress-fill"></div>
+                </div>
+                <div class="prep-status" id="prep-status">Initializing...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
     <div class="toast" id="toast">
         <div class="toast-content">
             <div class="toast-icon">
@@ -661,12 +677,14 @@
         </div>
     </div>
 
+    <!-- Settings FAB -->
     <button class="settings-fab" id="settings-fab">
         <i class="fas fa-cog"></i>
     </button>
 
+    <!-- Scripts -->
     <script src="app.js"></script>
     <script src="aloco.js"></script>
     <script src="server.js"></script>
-</body>    
+</body>
 </html>
